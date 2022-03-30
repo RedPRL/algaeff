@@ -1,0 +1,22 @@
+opam-version: "2.0"
+name: "algaeff"
+synopsis: "Reusable Effect-Based Components"
+description: """
+This OCaml library collects reusable effect-based components we have identified while developing our proof assistants based on algebraic effects.
+"""
+maintainer: "favonia <favonia@gmail.com>"
+authors: "The RedPRL Development Team"
+license: "Apache-2.0"
+homepage: "https://github.com/RedPRL/algaeff"
+bug-reports: "https://github.com/RedPRL/algaeff/issues"
+dev-repo: "git+https://github.com/RedPRL/algaeff.git"
+depends: [
+  "dune" {>= "2.0"}
+  "base-domains"
+  "odoc" {with-doc}
+]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+  ["dune" "build" "-p" name "-j" jobs "@runtest"] {with-test}
+  ["dune" "build" "-p" name "-j" jobs "@doc"] {with-doc}
+]
