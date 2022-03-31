@@ -2,6 +2,10 @@
 
 OCaml is bringing algebraic effects to the mainstream, and this library aims to collect reusable effect-based components we have identified.
 
+## Stability
+
+⚠ The API is experimental and unstable. We will break things if doing so leads to a better design.
+
 ## How to Use It
 
 ### OCaml >= 5.0.0, OCaml 4.12+domains, or OCaml 4.12+domains+effects
@@ -21,4 +25,4 @@ let forty_two = S.run ~init:100 @@ fun () ->
 
 ### Documentation
 
-[Full API documentation](https://redprl.org/algaeff/algaeff/).
+[Here is the API documentation.](https://redprl.org/algaeff/algaeff/)
