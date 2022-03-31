@@ -12,6 +12,7 @@ bug-reports: "https://github.com/RedPRL/algaeff/issues"
 dev-repo: "git+https://github.com/RedPRL/algaeff.git"
 depends: [
   "dune" {>= "2.0"}
+  "ocaml" {>= "4.12"}
   "base-domains"
   "odoc" {with-doc}
 ]
