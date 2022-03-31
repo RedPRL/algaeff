@@ -13,12 +13,12 @@ struct
   exception RecursiveLocking
 
   type _ Effect.t +=
-    | Lock : unit -> unit Effect.t
-    | Unlock : unit -> unit Effect.t
+    | Lock : unit Effect.t
+    | Unlock : unit Effect.t
 
   let exclusively f =
-    Effect.perform (Lock ());
-    Fun.protect ~finally:(fun () -> Effect.perform (Unlock ())) f
+    Effect.perform Lock;
+    Fun.protect ~finally:(fun () -> Effect.perform Unlock) f
 
   let run f =
     let open Effect.Deep in
@@ -26,13 +26,13 @@ struct
     try_with f ()
       { effc = fun (type a) (eff : a Effect.t) ->
             match eff with
-            | Lock () -> Option.some @@ fun (k : (a, _) continuation) ->
+            | Lock -> Option.some @@ fun (k : (a, _) continuation) ->
               begin
                 match Stdlib.Mutex.lock mutex with
                 | () -> continue k ()
                 | exception Sys_error _ -> discontinue k RecursiveLocking
               end
-            | Unlock () -> Option.some @@ fun (k : (a, _) continuation) ->
+            | Unlock -> Option.some @@ fun (k : (a, _) continuation) ->
               Stdlib.Mutex.unlock mutex;
               continue k ()
             | _ -> None }
