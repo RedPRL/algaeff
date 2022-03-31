@@ -31,7 +31,5 @@ struct
               continue k env
             | _ -> None }
 
-  (* helpers *)
-
   let scope f c = run (f @@ read ()) c
 end

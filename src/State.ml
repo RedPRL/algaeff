@@ -38,6 +38,5 @@ struct
               st := v; continue k ()
             | _ -> None }
 
-  (* helper functions *)
   let modify f = set @@ f @@ get ()
 end
