@@ -9,7 +9,8 @@ module type S =
 sig
   include Param
 
-  val get : unit -> env
+  val read : unit -> env
+  val scope : (env -> env) -> (unit -> 'a) -> 'a
   val run : env -> (unit -> 'a) -> 'a
 end
 
@@ -17,16 +18,20 @@ module Make (P : Param) =
 struct
   include P
 
-  type _ Effect.t += Get : env Effect.t
+  type _ Effect.t += Read : env Effect.t
 
-  let get () = Effect.perform Get
+  let read () = Effect.perform Read
 
   let run (env:env) f =
     let open Effect.Deep in
     try_with f ()
       { effc = fun (type a) (eff : a Effect.t) ->
             match eff with
-            | Get -> Option.some @@ fun (k : (a, _) continuation) ->
+            | Read -> Option.some @@ fun (k : (a, _) continuation) ->
               continue k env
             | _ -> None }
+
+  (* helpers *)
+
+  let scope f c = run (f @@ read ()) c
 end

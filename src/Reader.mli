@@ -7,7 +7,8 @@ module type S =
 sig
   include Param
 
-  val get : unit -> env
+  val read : unit -> env
+  val scope : (env -> env) -> (unit -> 'a) -> 'a
   val run : env -> (unit -> 'a) -> 'a
 end
 
