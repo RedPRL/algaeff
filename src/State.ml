@@ -11,6 +11,7 @@ sig
 
   val get : unit -> state
   val set : state -> unit
+  val modify : (state -> state) -> unit
   val run : init:state -> (unit -> 'a) -> 'a
 end
 
@@ -36,4 +37,6 @@ struct
             | Set v -> Option.some @@ fun (k : (a, _) continuation) ->
               st := v; continue k ()
             | _ -> None }
+
+  let modify f = set @@ f @@ get ()
 end

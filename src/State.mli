@@ -9,6 +9,7 @@ sig
 
   val get : unit -> state
   val set : state -> unit
+  val modify : (state -> state) -> unit
   val run : init:state -> (unit -> 'a) -> 'a
 end
 
