@@ -1,6 +1,6 @@
 module type S =
 sig
-  exception RecursiveLocking
+  exception Locked
 
   val exclusively : (unit -> 'a) -> 'a
   val run : (unit -> 'a) -> 'a
