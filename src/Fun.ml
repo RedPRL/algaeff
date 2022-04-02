@@ -13,6 +13,12 @@ struct
     | exception e ->
       let bt = Printexc.get_raw_backtrace () in
       Effect.Deep.discontinue_with_backtrace k e bt
+
+  let reperform k e =
+    finally k @@ fun () -> Effect.perform e
+
+  let reperform_preserving_backtrace k e =
+    finally_preserving_backtrace k @@ fun () -> Effect.perform e
 end
 
 module Shallow =
@@ -28,4 +34,10 @@ struct
     | exception e ->
       let bt = Printexc.get_raw_backtrace () in
       Effect.Shallow.discontinue_with_backtrace k e bt h
+
+  let reperform_with k e =
+    finally_with k @@ fun () -> Effect.perform e
+
+  let reperform_preserving_backtrace_with k e =
+    finally_preserving_backtrace_with k @@ fun () -> Effect.perform e
 end
