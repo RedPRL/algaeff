@@ -9,7 +9,7 @@
 
     It is impossible to implement waiting queues unless this module also
     handles lightweight threading.
-    For the applications that need synchronization between lightweight threads
+    For applications that need synchronization between lightweight threads
     (so that one thread would wait for another thread to unlock the mutex),
     check other heavier designs such as the Eio library.
 *)
