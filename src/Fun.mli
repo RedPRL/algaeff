@@ -13,19 +13,8 @@ sig
      ]}
   *)
 
-  val finally_preserving_backtrace : ('a, 'b) Effect.Deep.continuation -> (unit -> 'a) -> 'b
-  (**
-     A variant of {!val:finally} that preserves the backtrace of the exception thrown by the expression. I am still not sure whether this is in general a good idea, because the backtrace associated with the original {!val:Effect.perform} could potentially be more useful for debugging than that associated with the {!val:raise} inside the OCaml expression. (This is different from exception handling where original backtraces are probably always better.)
-     {[
-       Eff.Fun.Deep.finally_preserving_backtrace k @@ fun () -> some OCaml expression
-     ]}
-  *)
-
   val reperform : ('a, 'b) Effect.Deep.continuation -> 'a Effect.t -> 'b
   (** [reperform k e] performs the effect [e] and continues the execution with the continuation [k], in a way similar to {!val:finally}. *)
-
-  val reperform_preserving_backtrace : ('a, 'b) Effect.Deep.continuation -> 'a Effect.t -> 'b
-  (** [reperform_preserving_backtrace k e] performs the effect [e] and continues the execution with the continuation [k], in a way similar to {!val:finally_preserving_backtrace}. *)
 end
 
 module Shallow :
@@ -33,12 +22,6 @@ sig
   val finally_with : ('a, 'b) Effect.Shallow.continuation -> (unit -> 'a) -> ('b, 'c) Effect.Shallow.handler -> 'c
   (** See {!val:Deep.finally}. *)
 
-  val finally_preserving_backtrace_with : ('a, 'b) Effect.Shallow.continuation -> (unit -> 'a) -> ('b, 'c) Effect.Shallow.handler -> 'c
-  (** See {!val:Deep.finally_preserving_backtrace}. *)
-
   val reperform_with : ('a, 'b) Effect.Shallow.continuation -> 'a Effect.t -> ('b, 'c) Effect.Shallow.handler -> 'c
   (** See {!val:Deep.reperform}. *)
-
-  val reperform_preserving_backtrace_with : ('a, 'b) Effect.Shallow.continuation -> 'a Effect.t -> ('b, 'c) Effect.Shallow.handler -> 'c
-  (** See {!val:Deep.reperform_preserving_backtrace}. *)
 end
