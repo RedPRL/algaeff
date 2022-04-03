@@ -10,6 +10,11 @@ module Make () =
 struct
   exception Locked
 
+  let () = Printexc.register_printer @@
+    function
+    | Locked -> Some "Mutex already locked"
+    | _ -> None
+
   module S = State.Make(struct type state = bool end)
 
   let exclusively f =
