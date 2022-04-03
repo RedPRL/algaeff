@@ -9,7 +9,7 @@ sig
 
   val read : unit -> env
   val scope : (env -> env) -> (unit -> 'a) -> 'a
-  val run : env -> (unit -> 'a) -> 'a
+  val run : env:env -> (unit -> 'a) -> 'a
 end
 
 module Make (P : Param) : S with type env = P.env

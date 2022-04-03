@@ -1,0 +1,19 @@
+(test
+ (name TestState)
+ (modules TestState)
+ (libraries qcheck-core qcheck-core.runner algaeff))
+
+(test
+ (name TestReader)
+ (modules TestReader)
+ (libraries qcheck-core qcheck-core.runner algaeff))
+
+(test
+ (name TestMutex)
+ (modules TestMutex)
+ (libraries alcotest algaeff))
+
+(test
+ (name Example)
+ (modules Example)
+ (libraries algaeff))
