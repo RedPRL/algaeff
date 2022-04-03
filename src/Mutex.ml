@@ -17,7 +17,9 @@ struct
       raise Locked
     else begin
       S.set true;
-      Stdlib.Fun.protect ~finally:(fun () -> S.set false) f
+      match f () with
+      | ans -> S.set false; ans
+      | exception e -> S.set false; raise e
     end
 
   let run f = S.run ~init:false f
