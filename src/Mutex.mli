@@ -11,7 +11,7 @@
     handles lightweight threading.
     For applications that need synchronization between lightweight threads
     (so that one thread would wait for another thread to unlock the mutex),
-    check other heavier designs such as the Eio library.
+    check other libraries such as the {{: https://github.com/ocaml-multicore/eio}Eio} and {{: https://erratique.ch/software/affect}Affect}.
 *)
 
 (** The signature of locking effects. *)
