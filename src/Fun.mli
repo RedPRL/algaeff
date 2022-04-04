@@ -12,7 +12,7 @@ sig
       Here is an example that calls {!val:List.nth} and then either returns the found element with [continue]
       or raises the exception {!exception:Not_found} with [discontinue].
       {[
-        Eff.Fun.Deep.finally k @@ fun () -> List.nth elements n
+        Algaeff.Fun.Deep.finally k @@ fun () -> List.nth elements n
       ]}
   *)
 

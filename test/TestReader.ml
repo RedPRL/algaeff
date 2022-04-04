@@ -1,6 +1,6 @@
 module Q = QCheck2
 
-module ReaderEff = Eff.Reader.Make (struct type env = int end)
+module ReaderEff = Algaeff.Reader.Make (struct type env = int end)
 
 module ReaderMonad =
 struct
@@ -13,7 +13,7 @@ end
 
 module ReaderUnmonad =
 struct
-  module U = Eff.Unmonad.Make (ReaderMonad)
+  module U = Algaeff.Unmonad.Make (ReaderMonad)
   type env = int
   let read () = U.perform ReaderMonad.read
   let scope f m = U.perform @@ ReaderMonad.scope f @@ U.run m
@@ -38,7 +38,7 @@ let gen_cmd =
 
 let gen_prog = Q.Gen.list gen_cmd
 
-module ReaderTester (S : Eff.Reader.S with type env = int) =
+module ReaderTester (S : Algaeff.Reader.S with type env = int) =
 struct
   let trace ~env prog =
     let rec go =

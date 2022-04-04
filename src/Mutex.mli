@@ -2,7 +2,7 @@
 
 (**
    {[
-     module M = Eff.Mutex.Make ()
+     module M = Algaeff.Mutex.Make ()
 
      let () = M.run @@ fun () ->
        let ten = M.exclusively @@ fun () -> 10 in

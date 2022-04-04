@@ -16,7 +16,7 @@ module Unmonad : module type of Unmonad
 
     Add the following line to the beginning of the code:
     {[
-      open Eff.StdlibShim
+      open Algaeff.StdlibShim
     ]}
 *)
 module StdlibShim : module type of StdlibShim

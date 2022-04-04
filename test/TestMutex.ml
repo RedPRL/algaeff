@@ -1,6 +1,6 @@
 module AT = Alcotest
-module M1 = Eff.Mutex.Make ()
-module M2 = Eff.Mutex.Make ()
+module M1 = Algaeff.Mutex.Make ()
+module M2 = Algaeff.Mutex.Make ()
 
 type cmd = Ret | M1E of prog | M2E of prog | M1R of prog | M2R of prog
 and prog = cmd list

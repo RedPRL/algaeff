@@ -2,7 +2,7 @@
 
 (**
    {[
-     module R = Eff.Reader.Make (struct type env = int end)
+     module R = Algaeff.Reader.Make (struct type env = int end)
 
      let () = R.run ~env:42 @@ fun () ->
        (* this will print out 42 *)

@@ -9,5 +9,5 @@
   (action (copy StdlibShim.4.ml StdlibShim.ml)))
 
 (library
- (name Eff)
+ (name Algaeff)
  (public_name algaeff))
