@@ -1,4 +1,4 @@
-(** Reusable effect-based components. *)
+(** Reusable effects-based components. *)
 
 (** {1 Reusable components} *)
 

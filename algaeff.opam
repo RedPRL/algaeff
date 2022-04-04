@@ -1,8 +1,8 @@
 opam-version: "2.0"
 name: "algaeff"
-synopsis: "Reusable Effect-Based Components"
+synopsis: "Reusable Effects-Based Components"
 description: """
-This OCaml library collects reusable effect-based components we have identified while developing our proof assistants based on algebraic effects.
+This OCaml library collects reusable effects-based components we have identified while developing our proof assistants based on algebraic effects.
 """
 maintainer: "favonia <favonia@gmail.com>"
 authors: "The RedPRL Development Team"

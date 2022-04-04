@@ -1,6 +1,6 @@
-# 🦠 Reusable Effect-Based Components
+# 🦠 Reusable Effects-Based Components
 
-OCaml is bringing algebraic effects to the mainstream, and this library aims to collect reusable effect-based components we have identified.
+OCaml is bringing algebraic effects to the mainstream, and this library aims to collect reusable effects-based components we have identified.
 
 ## Stability
 
