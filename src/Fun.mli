@@ -17,7 +17,7 @@ sig
   *)
 
   val reperform : ('a, 'b) Effect.Deep.continuation -> 'a Effect.t -> 'b
-  (** [reperform k e] performs the effect [e] and then resume the execution with the continuation [k], in a way similar to {!val:finally}.
+  (** [reperform k e] performs the effect [e] and then resumes the execution with the continuation [k], in a way similar to {!val:finally}.
       It relays the result of performing the effect [e] with [continue] or [discontinue] depending on whether an exception is raised. *)
 end
 
