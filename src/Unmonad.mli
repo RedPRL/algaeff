@@ -32,7 +32,7 @@
     Also, monads do not mix well with exceptions, and thus the [bind] operation should not
     raise an exception unless it encounters a truly unrecoverable fatal error. Raising an exception
     within [bind] will skip the continuation, and thus potentially skipping exception handlers
-    within the continuation. Those handlers might be crucial for properly releasing allocated resources.
+    within the continuation. Those handlers might be crucial for properly releasing acquired resources.
 *)
 
 module type Monad =
