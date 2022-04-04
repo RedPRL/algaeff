@@ -7,7 +7,8 @@
     {[
       module StateMonad =
       struct
-        type 'a t = int -> 'a * int
+        type state = int
+        type 'a t = state -> 'a * state
         let ret x s = x, s
         let bind m f s = let x, s = m s in f x s
         let get s = s, s
@@ -17,8 +18,8 @@
 
       module StateUnmonad =
       struct
-        module U = Algaeff.Unmonad.Make (StateMonad)
         type state = int
+        module U = Algaeff.Unmonad.Make (StateMonad)
         let get () = U.perform StateMonad.get
         let set s = U.perform @@ StateMonad.set s
         let modify f = U.perform @@ StateMonad.modify f
