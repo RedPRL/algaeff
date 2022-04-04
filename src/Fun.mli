@@ -1,24 +1,30 @@
-open StdlibShim
-
 (** Useful helper functions around effects. *)
+
+open StdlibShim
 
 module Deep :
 sig
+  (** Useful helper functions for deep handlers. *)
 
   val finally : ('a, 'b) Effect.Deep.continuation -> (unit -> 'a) -> 'b
-  (**
-     There are cases where one wants to resume a continuation with an expression, regardless of whether the expression will raise an exception or not. The current OCaml API forces us to choose between [continue] and [discontinue], depending on whether the expression is returning a value or raising an exception. I am tired of writing the boilerplate to redirect the value/exception. This simple function will do the right thing in both cases. Usage:
-     {[
-       Eff.Fun.Deep.finally k @@ fun () -> some OCaml expression
-     ]}
+  (** [finally f] runs the thunk [f] and calls [continue] if a value is returned and [discontinue] if an exception is raised.
+
+      Here is an example that calls {!val:List.nth} and then either returns the found element with [continue]
+      or raises the exception {!exception:Not_found} with [discontinue].
+      {[
+        Eff.Fun.Deep.finally k @@ fun () -> List.nth elements n
+      ]}
   *)
 
   val reperform : ('a, 'b) Effect.Deep.continuation -> 'a Effect.t -> 'b
-  (** [reperform k e] performs the effect [e] and continues the execution with the continuation [k], in a way similar to {!val:finally}. *)
+  (** [reperform k e] performs the effect [e] and then resume the execution with the continuation [k], in a way similar to {!val:finally}.
+      It relays the result of performing the effect [e] with [continue] or [discontinue] depending on whether an exception is raised. *)
 end
 
 module Shallow :
 sig
+  (** Useful helper functions for shallow handlers. *)
+
   val finally_with : ('a, 'b) Effect.Shallow.continuation -> (unit -> 'a) -> ('b, 'c) Effect.Shallow.handler -> 'c
   (** See {!val:Deep.finally}. *)
 
