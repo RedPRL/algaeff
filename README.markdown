@@ -19,8 +19,8 @@ This library focuses on the rest.
 
 There are a few other useful functions and modules:
 
-- `Algaeff.StdlibShim`: re-expose `Stdlib.Effect` with name changes introduced in OCaml 5.
-- [Algaeff.Fun.Deep.finally](https://redprl.org/algaeff/algaeff/Algaeff/Fun/Deep/index.html#val-finally): run an expression, and then call `Effect.Deep.continue` or `Effect.Deep.discontinue` accordingly.
+- [Algaeff.StdlibShim](https://redprl.org/algaeff/algaeff/Algaeff/StdlibShim): a shim for OCaml < 5.
+- [Algaeff.Fun.Deep.finally](https://redprl.org/algaeff/algaeff/Algaeff/Fun/Deep/index.html#val-finally): call `continue` or `discontinue` accordingly.
 - [Algaeff.Fun.Deep.reperform](https://redprl.org/algaeff/algaeff/Algaeff/Fun/Deep/index.html#val-reperform): continue performing an effect.
 
 ## How to Use It
