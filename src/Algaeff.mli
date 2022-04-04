@@ -10,6 +10,8 @@ module Mutex : module type of Mutex
 
 module Unmonad : module type of Unmonad
 
+module WoundSpawn : module type of WoundSpawn
+
 (** {1 Auxiliary functions and modules} *)
 
 (** A {!module:Stdlib.Effect} shim for OCaml < 5.
