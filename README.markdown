@@ -4,7 +4,7 @@ OCaml is bringing algebraic effects to the mainstream, and this library aims to 
 
 ## Stability
 
-⚠ The API is experimental and unstable. We will break things if doing so leads to a better design.
+⚠ The API is experimental and unstable. We will break things!
 
 ## Components
 
