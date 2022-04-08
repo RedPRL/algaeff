@@ -10,31 +10,16 @@ jobs:
       matrix:
         include:
           - ocaml-compiler: "ocaml-variants.4.12.0+domains"
-            make-doc: false
+            build-doc: false
           - ocaml-compiler: "ocaml-variants.4.12.0+domains+effects"
-            make-doc: false
+            build-doc: false
           - ocaml-compiler: "ocaml-variants.5.0.0+trunk"
-            make-doc: true
+            build-doc: true
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: ocaml/setup-ocaml@v2
+      - uses: RedPRL/actions-ocaml@v1
         with:
           ocaml-compiler: ${{ matrix.ocaml-compiler }}
-          dune-cache: true
-      - run: opam repo add alpha git+https://github.com/kit-ty-kate/opam-alpha-repository.git
-        if: ${{ matrix.ocaml-compiler == 'ocaml-variants.5.0.0+trunk' }}
-
-      - run: opam pin . --with-test --yes
-        if: ${{ ! matrix.make-doc }}
-      - run: opam pin . --with-doc --with-test --yes
-        if: ${{ matrix.make-doc }}
-
-      - run: echo 'opam-build-root='`opam var algaeff:build` >> $GITHUB_ENV
-        if: ${{ matrix.make-doc && github.ref == 'refs/heads/main' }}
-      - uses: peaceiris/actions-gh-pages@v3
-        if: ${{ matrix.make-doc && github.ref == 'refs/heads/main' }}
-        with:
-          force_orphan: true
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ${{ format('{0}/_build/default/_doc/_html/', env.opam-build-root) }}
+          build-doc: ${{ matrix.build-doc }}
+          publish-doc-if-built: ${{ github.ref == 'refs/heads/main' }}
