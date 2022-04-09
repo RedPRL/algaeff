@@ -11,7 +11,8 @@
    ]}
 *)
 
-(** This should be equivalent to {!module:Unmonad} applying to the standard state monad. *)
+(** This should be equivalent to {!module:Unmonad} applying to the standard state monad when continuations are one-shot.
+    (The current implementation uses mutable references and this statement has not been formally proved.) *)
 
 module type Param =
 sig
