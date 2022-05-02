@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: RedPRL/actions-ocaml@v1
+      - uses: RedPRL/actions-ocaml@v2
         with:
           ocaml-compiler: ${{ matrix.ocaml-compiler }}
           build-doc: ${{ matrix.build-doc }}
