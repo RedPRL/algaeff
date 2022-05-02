@@ -10,11 +10,9 @@ jobs:
       matrix:
         include:
           - ocaml-compiler: "ocaml-variants.4.12.0+domains"
-            build-doc: false
           - ocaml-compiler: "ocaml-variants.4.12.0+domains+effects"
-            build-doc: false
           - ocaml-compiler: "ocaml-variants.5.0.0+trunk"
-            build-doc: true
+            with-doc: true
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
