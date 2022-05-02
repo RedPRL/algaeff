@@ -1,12 +1,14 @@
 (rule
   (enabled_if (>= %{ocaml_version} "5.0"))
   (target StdlibShim.ml)
-  (action (copy StdlibShim.5.ml StdlibShim.ml)))
+  (deps StdlibShim.5.ml)
+  (action (copy %{deps} %{target})))
 
 (rule
   (enabled_if (< %{ocaml_version} "5.0"))
   (target StdlibShim.ml)
-  (action (copy StdlibShim.4.ml StdlibShim.ml)))
+  (deps StdlibShim.4.ml)
+  (action (copy %{deps} %{target})))
 
 (library
  (name Algaeff)
