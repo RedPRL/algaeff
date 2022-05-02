@@ -10,16 +10,14 @@ jobs:
       matrix:
         include:
           - ocaml-compiler: "ocaml-variants.4.12.0+domains"
-            build-doc: false
           - ocaml-compiler: "ocaml-variants.4.12.0+domains+effects"
-            build-doc: false
           - ocaml-compiler: "ocaml-variants.5.0.0+trunk"
-            build-doc: true
+            with-doc: true
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: RedPRL/actions-ocaml@v1
+      - uses: RedPRL/actions-ocaml@v2
         with:
           ocaml-compiler: ${{ matrix.ocaml-compiler }}
-          build-doc: ${{ matrix.build-doc }}
+          with-doc: ${{ matrix.with-doc }}
           publish-doc-if-built: ${{ github.ref == 'refs/heads/main' }}
