@@ -8,7 +8,6 @@ sig
 
   val finally : ('a, 'b) Effect.Deep.continuation -> (unit -> 'a) -> 'b
   (** [finally f] runs the thunk [f] and calls [continue] if a value is returned and [discontinue] if an exception is raised.
-
       Here is an example that calls {!val:List.nth} and then either returns the found element with [continue]
       or raises the exception {!exception:Not_found} with [discontinue].
       {[
