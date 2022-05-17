@@ -13,7 +13,7 @@ dev-repo: "git+https://github.com/RedPRL/algaeff.git"
 depends: [
   "dune" {>= "2.0"}
   "base-domains"
-  "alcotest" {>= "1.5.0" & with-test}
+  "alcotest" {>= "1.5" & with-test}
   "qcheck-core" {>= "0.18" & with-test}
   "odoc" {with-doc}
 ]
