@@ -2,7 +2,7 @@ open StdlibShim
 
 module type Param =
 sig
-  type item
+  type row
 end
 
 module type S =
@@ -10,10 +10,10 @@ sig
   include Param
 
   type id = int
-  val insert : item -> id
-  val select : id -> item
-  val export : unit -> item Seq.t
-  val run : ?init:item Seq.t -> (unit -> 'a) -> 'a
+  val insert : row -> id
+  val select : id -> row
+  val export : unit -> row Seq.t
+  val run : ?init:row Seq.t -> (unit -> 'a) -> 'a
 end
 
 module Make (P : Param) =
@@ -23,16 +23,16 @@ struct
   type id = int
 
   type _ Effect.t +=
-    | Insert : item -> id Effect.t
-    | Select : id -> item Effect.t
-    | Export : item Seq.t Effect.t
+    | Insert : row -> id Effect.t
+    | Select : id -> row Effect.t
+    | Export : row Seq.t Effect.t
 
   let insert x = Effect.perform (Insert x)
   let select i = Effect.perform (Select i)
   let export () = Effect.perform Export
 
   module M = Map.Make (Int)
-  module Eff = State.Make (struct type state = item M.t end)
+  module Eff = State.Make (struct type state = row M.t end)
 
   let run ?(init=Seq.empty) f =
     let init = M.of_seq @@ Seq.zip (Seq.ints 0) init in

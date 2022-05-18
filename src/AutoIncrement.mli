@@ -4,8 +4,8 @@
 
 module type Param =
 sig
-  type item
-  (** The type of items. *)
+  type row
+  (** The type of rows. *)
 end
 
 module type S =
@@ -15,13 +15,13 @@ sig
 
   type id = int
 
-  val insert : item -> id
+  val insert : row -> id
 
-  val select : id -> item
+  val select : id -> row
 
-  val export : unit -> item Seq.t
+  val export : unit -> row Seq.t
 
-  val run : ?init:item Seq.t -> (unit -> 'a) -> 'a
+  val run : ?init:row Seq.t -> (unit -> 'a) -> 'a
 end
 
-module Make (P : Param) : S with type item = P.item
+module Make (P : Param) : S with type row = P.row
