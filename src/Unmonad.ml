@@ -1,5 +1,3 @@
-open StdlibShim
-
 module type Monad =
 sig
   type 'a t

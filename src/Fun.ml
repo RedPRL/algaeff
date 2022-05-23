@@ -1,5 +1,3 @@
-open StdlibShim
-
 module Deep =
 struct
   let finally k f =

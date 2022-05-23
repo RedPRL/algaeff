@@ -1,7 +1,5 @@
 (** Useful helper functions around effects. *)
 
-open StdlibShim
-
 module Deep :
 sig
   (** Useful helper functions for deep handlers. *)

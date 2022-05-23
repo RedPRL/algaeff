@@ -17,17 +17,16 @@ Effect-based concurrency (cooperative lightweight threading) was already tackled
 such as [Eio](https://github.com/ocaml-multicore/eio) and [Affect](https://erratique.ch/software/affect).
 This library focuses on the rest.
 
-There are a few other useful functions and modules:
+There are a few other useful functions:
 
-- [Algaeff.StdlibShim](https://redprl.org/algaeff/algaeff/Algaeff/StdlibShim): a shim for OCaml < 5.
 - [Algaeff.Fun.Deep.finally](https://redprl.org/algaeff/algaeff/Algaeff/Fun/Deep/index.html#val-finally): call `continue` or `discontinue` accordingly.
 - [Algaeff.Fun.Deep.reperform](https://redprl.org/algaeff/algaeff/Algaeff/Fun/Deep/index.html#val-reperform): continue performing an effect.
 
 ## How to Use It
 
-### OCaml >= 5.0.0, OCaml 4.12+domains, or OCaml 4.12+domains+effects
+### OCaml >= 5.0.0
 
-You need a version of OCaml that supports algebraic effects.
+You need OCaml 5.
 
 ### Example Code
 

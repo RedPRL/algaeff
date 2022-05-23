@@ -1,5 +1,3 @@
-open StdlibShim
-
 module type Param =
 sig
   type env

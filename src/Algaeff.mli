@@ -10,17 +10,10 @@ module Mutex : module type of Mutex
 
 module Unmonad : module type of Unmonad
 
+(**/**)
 module AutoIncrement : module type of AutoIncrement
+(**/**)
 
-(** {1 Auxiliary functions and modules} *)
-
-(** A {!module:Stdlib.Effect} shim for OCaml < 5.
-
-    Add the following line to the beginning of the code:
-    {[
-      open Algaeff.StdlibShim
-    ]}
-*)
-module StdlibShim : module type of StdlibShim
+(** {1 Auxiliary tools} *)
 
 module Fun : module type of Fun
