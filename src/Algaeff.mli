@@ -6,6 +6,8 @@ module State : module type of State
 
 module Reader : module type of Reader
 
+module Sequencer : module type of Sequencer
+
 module Mutex : module type of Mutex
 
 module Unmonad : module type of Unmonad

@@ -10,6 +10,7 @@ OCaml is bringing algebraic effects to the mainstream, and this library aims to 
 
 - [Algaeff.State](https://redprl.org/algaeff/algaeff/Algaeff/State): mutable states
 - [Algaeff.Reader](https://redprl.org/algaeff/algaeff/Algaeff/Reader): read-only environments
+- [Algaeff.Sequencer](https://redprl.org/algaeff/algaeff/Algaeff/Sequencer): making a `Seq.t`
 - [Algaeff.Mutex](https://redprl.org/algaeff/algaeff/Algaeff/Mutex): simple locking to prevent re-entrance
 - [Algaeff.Unmonad](https://redprl.org/algaeff/algaeff/Algaeff/Unmonad): effects for any monadic operations
 

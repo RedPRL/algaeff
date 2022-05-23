@@ -49,7 +49,7 @@ module StateEffTester = StateTester (StateEff)
 module StateUnmonadTester = StateTester (StateUnmonad)
 
 let test_prog =
-  Q.Test.make ~name:"equal" (Q.Gen.pair Q.Gen.int gen_prog)
+  Q.Test.make ~name:"State" (Q.Gen.pair Q.Gen.int gen_prog)
     (fun (init, prog) ->
        List.equal Int.equal
          (StateEffTester.trace ~init prog)
