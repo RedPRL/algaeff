@@ -9,6 +9,11 @@
  (libraries qcheck-core qcheck-core.runner algaeff))
 
 (test
+ (name TestSequencer)
+ (modules TestSequencer)
+ (libraries qcheck-core qcheck-core.runner algaeff))
+
+(test
  (name TestMutex)
  (modules TestMutex)
  (libraries alcotest algaeff))

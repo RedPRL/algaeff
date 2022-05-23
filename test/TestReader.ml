@@ -54,7 +54,7 @@ module ReaderEffTester = ReaderTester (ReaderEff)
 module ReaderUnmonadTester = ReaderTester (ReaderUnmonad)
 
 let test_prog =
-  Q.Test.make ~name:"equal" (Q.Gen.pair Q.Gen.int gen_prog)
+  Q.Test.make ~name:"Reader" (Q.Gen.pair Q.Gen.int gen_prog)
     (fun (env, prog) ->
        List.equal Int.equal
          (ReaderEffTester.trace ~env prog)
