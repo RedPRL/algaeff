@@ -26,12 +26,12 @@ sig
   (** Retrieve the item associated with the ID. *)
 
   val export : unit -> elt Seq.t
-  (** Export the internal storage. Once exported, the representation is persistent and can be used without the effect handler. *)
+  (** Export the internal storage for serialization. Once exported, the representation is persistent and can be traversed without the effect handler. *)
 
   val run : ?init:elt Seq.t -> (unit -> 'a) -> 'a
   (** [run t] runs the thunk [t] and handles the effects for generating unique IDs.
 
-      @param init The initial storage exported by {!val:export}.
+      @param init The initial storage, which should be the output of some previous {!val:export}.
   *)
 end
 
