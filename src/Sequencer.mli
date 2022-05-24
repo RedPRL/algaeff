@@ -1,4 +1,4 @@
-(** Effects for generating a [Seq.t]. *)
+(** Effects for constructing a [Seq.t]. *)
 
 (**
    {[
