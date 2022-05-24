@@ -6,6 +6,9 @@
 
      (* The sequence corresponding to [[1; 2; 3]]. *)
      let seq : int Seq.t = S.run @@ fun () -> S.yield 1; S.yield 2; S.yield 3
+
+     (* An implementation of [List.to_seq]. *)
+     let to_seq l : int Seq.t = S.run @@ fun () -> List.iter S.yield l
    ]}
 *)
 
