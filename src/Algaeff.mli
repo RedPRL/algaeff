@@ -10,11 +10,9 @@ module Sequencer : module type of Sequencer
 
 module Mutex : module type of Mutex
 
-module Unmonad : module type of Unmonad
+module UniqueID : module type of UniqueID
 
-(**/**)
-module AutoIncrement : module type of AutoIncrement
-(**/**)
+module Unmonad : module type of Unmonad
 
 (** {1 Auxiliary tools} *)
 

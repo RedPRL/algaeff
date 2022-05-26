@@ -19,6 +19,11 @@
  (libraries alcotest algaeff))
 
 (test
+ (name TestUniqueID)
+ (modules TestUniqueID)
+ (libraries qcheck-core qcheck-core.runner algaeff))
+
+(test
  (name Example)
  (modules Example)
  (libraries algaeff))

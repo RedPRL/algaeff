@@ -1,17 +1,18 @@
 module type Param =
 sig
-  type row
+  type elt
 end
 
 module type S =
 sig
   include Param
 
-  type id = int
-  val insert : row -> id
-  val select : id -> row
-  val export : unit -> row Seq.t
-  val run : ?init:row Seq.t -> (unit -> 'a) -> 'a
+  type id = private int
+  val unsafe_id_of_int : int -> id
+  val register : elt -> id
+  val retrieve : id -> elt
+  val export : unit -> elt Seq.t
+  val run : ?init:elt Seq.t -> (unit -> 'a) -> 'a
 end
 
 module Make (P : Param) =
@@ -19,18 +20,19 @@ struct
   include P
 
   type id = int
+  let unsafe_id_of_int i = i
 
   type _ Effect.t +=
-    | Insert : row -> id Effect.t
-    | Select : id -> row Effect.t
-    | Export : row Seq.t Effect.t
+    | Insert : elt -> id Effect.t
+    | Select : id -> elt Effect.t
+    | Export : elt Seq.t Effect.t
 
-  let insert x = Effect.perform (Insert x)
-  let select i = Effect.perform (Select i)
+  let register x = Effect.perform (Insert x)
+  let retrieve i = Effect.perform (Select i)
   let export () = Effect.perform Export
 
   module M = Map.Make (Int)
-  module Eff = State.Make (struct type state = row M.t end)
+  module Eff = State.Make (struct type state = elt M.t end)
 
   let run ?(init=Seq.empty) f =
     let init = M.of_seq @@ Seq.zip (Seq.ints 0) init in

@@ -12,6 +12,7 @@ OCaml is bringing algebraic effects to the mainstream, and this library aims to 
 - [Algaeff.Reader](https://redprl.org/algaeff/algaeff/Algaeff/Reader): read-only environments
 - [Algaeff.Sequencer](https://redprl.org/algaeff/algaeff/Algaeff/Sequencer): making a `Seq.t`
 - [Algaeff.Mutex](https://redprl.org/algaeff/algaeff/Algaeff/Mutex): simple locking to prevent re-entrance
+- [Algaeff.UniqueID](https://redprl.org/algaeff/algaeff/Algaeff/UniqueID): generating unique IDs
 - [Algaeff.Unmonad](https://redprl.org/algaeff/algaeff/Algaeff/Unmonad): effects for any monadic operations
 
 Effect-based concurrency (cooperative lightweight threading) was already tackled by other libraries
