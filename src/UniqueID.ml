@@ -7,8 +7,16 @@ module type S =
 sig
   include Param
 
-  type id = private int
-  val unsafe_id_of_int : int -> id
+  module ID :
+  sig
+    type t = private int
+    val equal : t -> t -> bool
+    val compare : t -> t -> int
+    val dump : Format.formatter -> t -> unit
+    val unsafe_of_int : int -> t
+  end
+  type id = ID.t
+
   val register : elt -> id
   val retrieve : id -> elt
   val export : unit -> elt Seq.t
@@ -19,8 +27,15 @@ module Make (P : Param) =
 struct
   include P
 
+  module ID =
+  struct
+    type t = int
+    let equal = Int.equal
+    let compare = Int.compare
+    let dump = Format.pp_print_int
+    let unsafe_of_int i = i
+  end
   type id = int
-  let unsafe_id_of_int i = i
 
   type _ Effect.t +=
     | Insert : elt -> id Effect.t

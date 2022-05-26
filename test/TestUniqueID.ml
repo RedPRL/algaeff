@@ -2,13 +2,11 @@ module Q = QCheck2
 
 module U = Algaeff.UniqueID.Make (struct type elt = int end)
 
-let compare_id (i1 : U.id) (i2 : U.id) = Int.compare (i1 :> int) (i2 :> int)
-
 let test_uniqueness =
   Q.Test.make ~name:"UniqueID:uniqueness" Q.Gen.(list int)
     (fun l ->
        let ids = U.run @@ fun () -> List.map U.register l in
-       List.length (List.sort_uniq compare_id ids) = List.length ids)
+       List.length (List.sort_uniq U.ID.compare ids) = List.length ids)
 
 let test_retrieve =
   Q.Test.make ~name:"UniqueID:recovery" Q.Gen.(list int)

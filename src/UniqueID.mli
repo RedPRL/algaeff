@@ -13,11 +13,27 @@ sig
   include Param
   (** @open *)
 
-  type id = private int
-  (** The type of unique IDs. The client should not assume a particular indexing scheme. *)
+  (** The type of IDs and its friends. *)
+  module ID :
+  sig
+    type t = private int
+    (** Semi-abstract type of IDs. *)
 
-  val unsafe_id_of_int : int -> id
-  (** Unsafe conversion from {!type:int} to {!type:id}. Should be used only for de-serialization. *)
+    val equal : t -> t -> bool
+    (** Checking whether two IDs are equal. *)
+
+    val compare : t -> t -> int
+    (** Compare two IDs. *)
+
+    val dump : Format.formatter -> t -> unit
+    (** Printing the ID. *)
+
+    val unsafe_of_int : int -> t
+    (** Unsafe conversion from {!type:int}. Should be used only for de-serialization. *)
+  end
+
+  type id = ID.t
+  (** The type of unique IDs. The client should not assume a particular indexing scheme. *)
 
   val register : elt -> id
   (** Register a new item and get an ID. Note that registering the same item twice will get two different IDs. *)
