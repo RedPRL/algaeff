@@ -1,4 +1,5 @@
-(** Effects for constructing a [Seq.t]. *)
+(** Effects for constructing a [Seq.t].
+    @since 0.2 *)
 
 (**
    {[

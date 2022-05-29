@@ -1,4 +1,5 @@
-(** Effects for generating unique IDs. *)
+(** Effects for generating unique IDs.
+    @since 0.2 *)
 
 (** Generate unique IDs for registered items. *)
 
