@@ -12,10 +12,6 @@ sig
         Algaeff.Fun.Deep.finally k @@ fun () -> List.nth elements n
       ]}
   *)
-
-  val reperform : ('a, 'b) Effect.Deep.continuation -> 'a Effect.t -> 'b
-  (** [reperform k e] performs the effect [e] and then resumes the execution with the continuation [k], in a way similar to {!val:finally}.
-      It relays the result of performing the effect [e] with [continue] or [discontinue] depending on whether an exception is raised. *)
 end
 
 module Shallow :
@@ -24,7 +20,4 @@ sig
 
   val finally_with : ('a, 'b) Effect.Shallow.continuation -> (unit -> 'a) -> ('b, 'c) Effect.Shallow.handler -> 'c
   (** See {!val:Deep.finally}. *)
-
-  val reperform_with : ('a, 'b) Effect.Shallow.continuation -> 'a Effect.t -> ('b, 'c) Effect.Shallow.handler -> 'c
-  (** See {!val:Deep.reperform}. *)
 end

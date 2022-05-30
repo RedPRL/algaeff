@@ -22,7 +22,6 @@ This library focuses on the rest.
 There are a few other useful functions:
 
 - [Algaeff.Fun.Deep.finally](https://redprl.org/algaeff/algaeff/Algaeff/Fun/Deep/index.html#val-finally): call `continue` or `discontinue` accordingly.
-- [Algaeff.Fun.Deep.reperform](https://redprl.org/algaeff/algaeff/Algaeff/Fun/Deep/index.html#val-reperform): continue performing an effect.
 
 ## How to Use It
 
