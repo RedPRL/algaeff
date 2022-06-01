@@ -19,3 +19,4 @@ jobs:
           ocaml-compiler: ${{ matrix.ocaml-compiler }}
           with-doc: ${{ matrix.with-doc }}
           publish-doc-if-built: ${{ github.ref == 'refs/heads/main' }}
+          cache-prefix: "v1_something_to_clear_old_cache"
