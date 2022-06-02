@@ -5,12 +5,16 @@
 
 module type Param =
 sig
+  (** Parameters of the effects. *)
+
   type elt
   (** The type of elements. *)
 end
 
 module type S =
 sig
+  (** Signatures of the effects. *)
+
   include Param
   (** @open *)
 
@@ -53,3 +57,4 @@ sig
 end
 
 module Make (P : Param) : S with type elt = P.elt
+(** The implementation of the effects. *)
