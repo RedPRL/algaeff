@@ -1,4 +1,4 @@
-(** Effects for any monad. *)
+(** Effects for any monad (subject to OCaml continuations being one-shot). *)
 
 (** This is a general construction that uses effects to construct monadic expressions.
     Here is an alternative implementation of {!module:State} using
