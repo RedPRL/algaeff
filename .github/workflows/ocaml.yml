@@ -9,7 +9,7 @@ jobs:
     strategy:
       matrix:
         include:
-          - ocaml-compiler: "ocaml-variants.5.0.0+trunk"
+          - ocaml-compiler: "ocaml-base-compiler.5.0.0~alpha1"
             with-doc: true
     runs-on: ubuntu-latest
     steps:
@@ -19,4 +19,3 @@ jobs:
           ocaml-compiler: ${{ matrix.ocaml-compiler }}
           with-doc: ${{ matrix.with-doc }}
           publish-doc-if-built: ${{ github.ref == 'refs/heads/main' }}
-          cache-prefix: "v1_something_to_clear_old_cache"
