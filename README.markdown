@@ -15,7 +15,7 @@ OCaml is bringing algebraic effects to the mainstream, and this library aims to 
 - [Algaeff.UniqueID](https://redprl.org/algaeff/algaeff/Algaeff/UniqueID): generating unique IDs
 - [Algaeff.Unmonad](https://redprl.org/algaeff/algaeff/Algaeff/Unmonad): effects for any monadic operations
 
-Effect-based concurrency (cooperative lightweight threading) was already tackled by other libraries
+Effects-based concurrency (cooperative lightweight threading) was already tackled by other libraries
 such as [Eio](https://github.com/ocaml-multicore/eio) and [Affect](https://erratique.ch/software/affect).
 This library focuses on the rest.
 
