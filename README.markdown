@@ -1,6 +1,6 @@
 # 🦠 Reusable Effects-Based Components
 
-OCaml is bringing algebraic effects to the mainstream, and this library aims to collect reusable effects-based components we have identified.
+This library aims to collect reusable, general effects-based components we have seen when constructing our proof assistants using OCaml 5. All components here have appeared in various tutorials on algebraic effects; `algaeff` wraps these well-known components into an OPAM package.
 
 ## Stability
 
@@ -15,9 +15,7 @@ OCaml is bringing algebraic effects to the mainstream, and this library aims to 
 - [Algaeff.UniqueID](https://redprl.org/algaeff/algaeff/Algaeff/UniqueID): generating unique IDs
 - [Algaeff.Unmonad](https://redprl.org/algaeff/algaeff/Algaeff/Unmonad): effects for any monadic operations
 
-Effects-based concurrency (cooperative lightweight threading) was already tackled by other libraries
-such as [Eio](https://github.com/ocaml-multicore/eio) and [Affect](https://erratique.ch/software/affect).
-This library focuses on the rest.
+Effects-based concurrency (cooperative lightweight threading) was already tackled by other libraries such as [Eio](https://github.com/ocaml-multicore/eio) and [Affect](https://erratique.ch/software/affect). This library focuses on the rest.
 
 There are a few other useful functions:
 
