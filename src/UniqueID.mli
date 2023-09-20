@@ -54,6 +54,8 @@ sig
 
       @param init The initial storage, which should be the output of some previous {!val:export}.
   *)
+
+  val register_printer : ?register:(elt -> string) -> ?retrieve:(id -> string) -> ?export:string -> unit
 end
 
 module Make (P : Param) : S with type elt = P.elt

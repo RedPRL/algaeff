@@ -35,6 +35,8 @@ sig
 
   val run : (unit -> unit) -> elt Seq.t
   (** [run t] runs the thunk [t] which may perform sequencing effects. *)
+
+  val register_printer : ?yield:(elt -> string) -> unit
 end
 
 module Make (P : Param) : S with type elt = P.elt
