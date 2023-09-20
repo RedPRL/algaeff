@@ -73,5 +73,4 @@ struct
     | Effect.Unhandled (Select id) -> f (`Retrieve id)
     | Effect.Unhandled Export -> f `Export
     | _ -> None
-
 end
