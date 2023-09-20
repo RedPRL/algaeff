@@ -9,7 +9,7 @@ let test_uniqueness =
        List.length (List.sort_uniq U.ID.compare ids) = List.length ids)
 
 let test_retrieve =
-  Q.Test.make ~name:"UniqueID:recovery" Q.Gen.(list int)
+  Q.Test.make ~name:"UniqueID:retrieval" Q.Gen.(list int)
     (fun l ->
        let ids, exported = U.run @@ fun () ->
          let ids = List.map U.register l in

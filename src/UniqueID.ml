@@ -39,12 +39,12 @@ struct
   type id = int
 
   type _ Effect.t +=
-    | Insert : elt -> id Effect.t
-    | Select : id -> elt Effect.t
+    | Register : elt -> id Effect.t
+    | Retrieve : id -> elt Effect.t
     | Export : elt Seq.t Effect.t
 
-  let register x = Effect.perform (Insert x)
-  let retrieve i = Effect.perform (Select i)
+  let register x = Effect.perform (Register x)
+  let retrieve i = Effect.perform (Retrieve i)
   let export () = Effect.perform Export
 
   module M = Map.Make (Int)
@@ -57,20 +57,20 @@ struct
     try_with f ()
       { effc = fun (type a) (eff : a Effect.t) ->
             match eff with
-            | Insert x -> Option.some @@ fun (k : (a, _) continuation) ->
+            | Register x -> Option.some @@ fun (k : (a, _) continuation) ->
               let st = Eff.get () in
               let next = M.cardinal st in
               Eff.set @@ M.add next x st;
               continue k next
-            | Select i -> Option.some @@ fun (k : (a, _) continuation) ->
+            | Retrieve i -> Option.some @@ fun (k : (a, _) continuation) ->
               continue k @@ M.find i @@ Eff.get ()
             | Export -> Option.some @@ fun (k : (a, _) continuation) ->
               continue k @@ Seq.map snd @@ M.to_seq @@ Eff.get ()
             | _ -> None }
 
   let register_printer f = Printexc.register_printer @@ function
-    | Effect.Unhandled (Insert elt) -> f (`Register elt)
-    | Effect.Unhandled (Select id) -> f (`Retrieve id)
+    | Effect.Unhandled (Register elt) -> f (`Register elt)
+    | Effect.Unhandled (Retrieve id) -> f (`Retrieve id)
     | Effect.Unhandled Export -> f `Export
     | _ -> None
 end
