@@ -55,6 +55,7 @@ sig
       @param init The initial storage, which should be the output of some previous {!val:export}.
   *)
 
+  (**/**)
   val register_printer : ([`Register of elt | `Retrieve of id | `Export] -> string option) -> unit
 end
 

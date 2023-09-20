@@ -42,6 +42,7 @@ sig
   val run : env:env -> (unit -> 'a) -> 'a
   (** [run t] runs the thunk [t] which may perform reading effects. *)
 
+  (**/**)
   val register_printer : ([`Read] -> string option) -> unit
 end
 
