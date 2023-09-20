@@ -31,7 +31,7 @@ struct
 
   let scope f c = run ~env:(f @@ read ()) c
 
-  let register_printer ?read () = Printexc.register_printer @@ function
-    | Effect.Unhandled Read -> read
+  let register_printer f = Printexc.register_printer @@ function
+    | Effect.Unhandled Read -> f `Read
     | _ -> None
 end

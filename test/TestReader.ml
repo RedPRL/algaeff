@@ -18,7 +18,7 @@ struct
   let read () = U.perform ReaderMonad.read
   let scope f m = U.perform @@ ReaderMonad.scope f @@ U.run m
   let run ~env f = U.run f env
-  let register_printer ?read:_ () = ()
+  let register_printer _ = ()
 end
 
 type cmd = ReadAndPrint | Scope of (int -> int) * prog

@@ -41,7 +41,7 @@ sig
   val run : init:state -> (unit -> 'a) -> 'a
   (** [run t] runs the thunk [t] which may perform state effects. *)
 
-  val register_printer : ?get:string -> ?set:(state -> string) -> unit -> unit
+  val register_printer : ([`Get | `Set of state] -> string option) -> unit
 end
 
 module Make (P : Param) : S with type state = P.state

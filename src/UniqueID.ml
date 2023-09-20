@@ -67,10 +67,10 @@ struct
               continue k @@ Seq.map snd @@ M.to_seq @@ Eff.get ()
             | _ -> None }
 
-  let register_printer ?register ?retrieve ?export () = Printexc.register_printer @@ function
-    | Effect.Unhandled (Insert elt) -> Option.map (fun f -> f elt) register
-    | Effect.Unhandled (Select id) -> Option.map (fun f -> f id) retrieve
-    | Effect.Unhandled Export -> export
+  let register_printer f = Printexc.register_printer @@ function
+    | Effect.Unhandled (Insert elt) -> f (`Register elt)
+    | Effect.Unhandled (Select id) -> f (`Retrieve id)
+    | Effect.Unhandled Export -> f `Export
     | _ -> None
 
 end
