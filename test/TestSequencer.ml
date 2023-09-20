@@ -26,6 +26,7 @@ struct
   type elt = int
   let yield x = U.perform (SequencerMonad.yield x)
   let run f = output_to_seq @@ snd @@ U.run f
+  let register_printer ?yield:_ () = ()
 end
 
 type cmd = Yield of int

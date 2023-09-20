@@ -27,4 +27,8 @@ struct
             | Yield x -> Option.some @@ fun (k : (a, _) continuation) ->
               Seq.Cons (x, continue k)
             | _ -> None }
+
+  let register_printer ?yield () = Printexc.register_printer @@ function
+    | Effect.Unhandled (Yield elt) -> Option.map (fun f -> f elt) yield
+    | _ -> None
 end

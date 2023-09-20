@@ -37,4 +37,9 @@ struct
             | _ -> None }
 
   let modify f = set @@ f @@ get ()
+
+  let register_printer ?get ?set () = Printexc.register_printer @@ function
+  | Effect.Unhandled Get -> get
+  | Effect.Unhandled (Set state) -> Option.map (fun f -> f state) set
+  | _ -> None
 end
