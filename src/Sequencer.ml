@@ -9,6 +9,7 @@ sig
 
   val yield : elt -> unit
   val run : (unit -> unit) -> elt Seq.t
+  val register_printer : ([`Yield of elt] -> string option) -> unit
 end
 
 module Make (P : Param) =
@@ -27,4 +28,8 @@ struct
             | Yield x -> Option.some @@ fun (k : (a, _) continuation) ->
               Seq.Cons (x, continue k)
             | _ -> None }
+
+  let register_printer f = Printexc.register_printer @@ function
+    | Effect.Unhandled (Yield elt) -> f (`Yield elt)
+    | _ -> None
 end

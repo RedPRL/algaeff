@@ -21,6 +21,7 @@ sig
   val retrieve : id -> elt
   val export : unit -> elt Seq.t
   val run : ?init:elt Seq.t -> (unit -> 'a) -> 'a
+  val register_printer : ([`Register of elt | `Retrieve of id | `Export] -> string option) -> unit
 end
 
 module Make (P : Param) =
@@ -66,4 +67,10 @@ struct
             | Export -> Option.some @@ fun (k : (a, _) continuation) ->
               continue k @@ Seq.map snd @@ M.to_seq @@ Eff.get ()
             | _ -> None }
+
+  let register_printer f = Printexc.register_printer @@ function
+    | Effect.Unhandled (Insert elt) -> f (`Register elt)
+    | Effect.Unhandled (Select id) -> f (`Retrieve id)
+    | Effect.Unhandled Export -> f `Export
+    | _ -> None
 end

@@ -11,6 +11,7 @@ sig
   val set : state -> unit
   val modify : (state -> state) -> unit
   val run : init:state -> (unit -> 'a) -> 'a
+  val register_printer : ([`Get | `Set of state] -> string option) -> unit
 end
 
 module Make (P : Param) =
@@ -37,4 +38,9 @@ struct
             | _ -> None }
 
   let modify f = set @@ f @@ get ()
+
+  let register_printer f = Printexc.register_printer @@ function
+    | Effect.Unhandled Get -> f `Get
+    | Effect.Unhandled (Set state) -> f (`Set state)
+    | _ -> None
 end

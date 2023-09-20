@@ -20,6 +20,7 @@ struct
   let set s = U.perform @@ StateMonad.set s
   let modify f = U.perform @@ StateMonad.modify f
   let run ~init f = fst @@ U.run f init
+  let register_printer _ = ()
 end
 
 type cmd = Set of int | GetAndPrint | Mod of (int -> int)
