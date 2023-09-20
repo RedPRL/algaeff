@@ -10,6 +10,7 @@ sig
   val read : unit -> env
   val scope : (env -> env) -> (unit -> 'a) -> 'a
   val run : env:env -> (unit -> 'a) -> 'a
+  val register_printer : ([`Read] -> string option) -> unit
 end
 
 module Make (P : Param) =

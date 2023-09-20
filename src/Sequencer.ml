@@ -9,6 +9,7 @@ sig
 
   val yield : elt -> unit
   val run : (unit -> unit) -> elt Seq.t
+  val register_printer : ([`Yield of elt] -> string option) -> unit
 end
 
 module Make (P : Param) =

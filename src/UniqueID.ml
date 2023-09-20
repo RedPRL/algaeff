@@ -21,6 +21,7 @@ sig
   val retrieve : id -> elt
   val export : unit -> elt Seq.t
   val run : ?init:elt Seq.t -> (unit -> 'a) -> 'a
+  val register_printer : ([`Register of elt | `Retrieve of id | `Export] -> string option) -> unit
 end
 
 module Make (P : Param) =
