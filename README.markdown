@@ -2,10 +2,6 @@
 
 This library aims to collect reusable, general effects-based components we have seen when constructing our proof assistants using OCaml 5. All components here have appeared in various tutorials on algebraic effects; `algaeff` wraps these well-known components into an OPAM package.
 
-## Stability
-
-⚠ The API is experimental and unstable. We will break things!
-
 ## Components
 
 - [Algaeff.State](https://redprl.org/algaeff/algaeff/Algaeff/State): mutable states
