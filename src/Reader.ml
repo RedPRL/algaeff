@@ -35,4 +35,6 @@ struct
   let register_printer f = Printexc.register_printer @@ function
     | Effect.Unhandled Read -> f `Read
     | _ -> None
+
+  let () = register_printer @@ fun _ -> Some "Unhandled algaeff effect; use Algaeff.Reader.run"
 end

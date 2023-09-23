@@ -32,4 +32,6 @@ struct
   let register_printer f = Printexc.register_printer @@ function
     | Effect.Unhandled (Yield elt) -> f (`Yield elt)
     | _ -> None
+
+  let () = register_printer @@ fun _ -> Some "Unhandled algaeff effect; use Algaeff.Sequencer.run"
 end

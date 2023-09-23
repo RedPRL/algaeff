@@ -47,7 +47,7 @@ sig
 
       The input type of the printer [p] is a variant representation of the only internal effect used in this module. It corresponds to the effect trigger by {!val:read}.
 
-      @since 1.0.0
+      @since 1.1.0
   *)
 end
 

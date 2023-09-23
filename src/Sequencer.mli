@@ -41,7 +41,7 @@ sig
 
       The input type of the printer [p] is a variant representation of the internal effects used in this module. They correspond to the effects trigger by {!val:yield}. More precisely, [`Yield elt] corresponds to the effect triggered by [yield elt].
 
-      @since 1.0.0
+      @since 1.1.0
   *)
 end
 

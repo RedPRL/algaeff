@@ -1,8 +1,7 @@
 (** Effects for any monad (subject to OCaml continuations being one-shot). *)
 
 (** This is a general construction that uses effects to construct monadic expressions.
-    Here is an alternative implementation of {!module:State} using
-    the standard state monad:
+    Here is an alternative implementation of {!module:State} using the standard state monad:
 
     {[
       module StateMonad =
@@ -33,6 +32,8 @@
     raise an exception unless it encounters a truly unrecoverable fatal error. Raising an exception
     within [bind] will skip the continuation, and thus potentially skipping exception handlers
     within the continuation. Those handlers might be crucial for properly releasing acquired resources.
+
+    Also note that we are not aware of any actual use of this module, but we decided to keep it anyway.
 *)
 
 module type Monad =
