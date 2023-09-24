@@ -48,7 +48,7 @@ sig
       - [`Get] corresponds to the effect triggered by [get ()].
       - [`Set state] corresponds to the effect triggered by [set state].
 
-      @since 1.0.0
+      @since 1.1.0
   *)
 end
 

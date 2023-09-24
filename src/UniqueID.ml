@@ -73,4 +73,6 @@ struct
     | Effect.Unhandled (Retrieve id) -> f (`Retrieve id)
     | Effect.Unhandled Export -> f `Export
     | _ -> None
+
+  let () = register_printer @@ fun _ -> Some "Unhandled algaeff effect; use Algaeff.UniqueID.run"
 end

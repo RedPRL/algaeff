@@ -27,4 +27,8 @@ struct
       ; exnc = raise
       ; effc = function Monadic m -> Option.some @@ fun k -> M.bind m (Effect.Deep.continue k) | _ -> None
       }
+
+  let () = Printexc.register_printer @@ function
+    | Effect.Unhandled (Monadic _) -> Some "Unhandled algaeff effect; use Algaeff.Unmonad.run"
+    | _ -> None
 end

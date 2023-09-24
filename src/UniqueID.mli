@@ -63,7 +63,7 @@ sig
       - [`Retrieve id] corresponds to the effect triggered by [retrieve id].
       - [`Export] corresponds to the effect triggered by [export ()].
 
-      @since 1.0.0
+      @since 1.1.0
   *)
 end
 
