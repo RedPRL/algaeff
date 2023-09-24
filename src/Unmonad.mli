@@ -33,7 +33,7 @@
     within [bind] will skip the continuation, and thus potentially skipping exception handlers
     within the continuation. Those handlers might be crucial for properly releasing acquired resources.
 
-    Also note that we are not aware of any actual use of this module, but we decided to keep it anyway.
+    PS: We are not aware of any actual use of this module, but we decided to keep it anyway.
 *)
 
 module type Monad =
