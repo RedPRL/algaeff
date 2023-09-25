@@ -34,7 +34,7 @@ sig
     (** Printing the ID. *)
 
     val unsafe_of_int : int -> t
-    (** Unsafe conversion from {!type:int}. Should be used only for de-serialization. *)
+    (** Unsafe conversion from [int]. Should be used only for de-serialization. *)
   end
 
   type id = ID.t
