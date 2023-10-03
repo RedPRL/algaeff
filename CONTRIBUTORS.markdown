@@ -1,4 +1,4 @@
 # CONTRIBUTORS
 
-Favonia
-Matthew McQuaid
+- Favonia
+- Matthew McQuaid
