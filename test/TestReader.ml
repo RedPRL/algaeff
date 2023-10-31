@@ -13,7 +13,7 @@ end
 
 module ReaderUnmonad =
 struct
-  module U = Algaeff.Unmonad.Make (ReaderMonad)
+  module U = Unmonad.Make (ReaderMonad)
   let read () = U.perform ReaderMonad.read
   let scope f m = U.perform @@ ReaderMonad.scope f @@ U.run m
   let run ~env f = U.run f env

@@ -1,27 +1,7 @@
-(test
- (name TestState)
- (modules TestState)
- (libraries qcheck-core qcheck-core.runner algaeff))
-
-(test
- (name TestReader)
- (modules TestReader)
- (libraries qcheck-core qcheck-core.runner algaeff))
-
-(test
- (name TestSequencer)
- (modules TestSequencer)
- (libraries qcheck-core qcheck-core.runner algaeff))
-
-(test
- (name TestMutex)
- (modules TestMutex)
- (libraries alcotest algaeff))
-
-(test
- (name TestUniqueID)
- (modules TestUniqueID)
- (libraries qcheck-core qcheck-core.runner algaeff))
+(tests
+ (names TestState TestReader TestSequencer TestMutex TestUniqueID)
+ (modules TestState TestReader TestSequencer TestMutex TestUniqueID Unmonad)
+ (libraries qcheck-core qcheck-core.runner alcotest algaeff))
 
 (test
  (name Example)
