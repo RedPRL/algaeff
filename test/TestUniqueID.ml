@@ -1,6 +1,6 @@
 module Q = QCheck2
 
-module U = Algaeff.UniqueID.Make (struct type elt = int end)
+module U = Algaeff.UniqueID.Make (Int)
 
 let test_uniqueness =
   Q.Test.make ~name:"UniqueID:uniqueness" Q.Gen.(list int)

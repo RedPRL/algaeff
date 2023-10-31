@@ -17,7 +17,7 @@ struct
     | Locked -> Some "Mutex already locked"
     | _ -> None
 
-  module S = State.Make(struct type state = bool end)
+  module S = State.Make (Bool)
 
   let exclusively f =
     if S.get() then

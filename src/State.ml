@@ -1,31 +1,24 @@
-module type Param =
-sig
-  type state
-end
-
 module type S =
 sig
-  include Param
+  module State : Sigs.Type
 
-  val get : unit -> state
-  val set : state -> unit
-  val modify : (state -> state) -> unit
-  val run : init:state -> (unit -> 'a) -> 'a
-  val register_printer : ([`Get | `Set of state] -> string option) -> unit
+  val get : unit -> State.t
+  val set : State.t -> unit
+  val modify : (State.t -> State.t) -> unit
+  val run : init:State.t -> (unit -> 'a) -> 'a
+  val register_printer : ([`Get | `Set of State.t] -> string option) -> unit
 end
 
-module Make (P : Param) =
+module Make (State : Sigs.Type) =
 struct
-  include P
-
   type _ Effect.t +=
-    | Get : state Effect.t
-    | Set : state -> unit Effect.t
+    | Get : State.t Effect.t
+    | Set : State.t -> unit Effect.t
 
   let get () = Effect.perform Get
   let set st = Effect.perform (Set st)
 
-  let run ~(init:state) f =
+  let run ~(init:State.t) f =
     let open Effect.Deep in
     let st = ref init in
     try_with f ()

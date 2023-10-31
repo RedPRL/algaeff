@@ -1,22 +1,15 @@
-module type Param =
-sig
-  type elt
-end
-
 module type S =
 sig
-  include Param
+  module Elt : Sigs.Type
 
-  val yield : elt -> unit
-  val run : (unit -> unit) -> elt Seq.t
-  val register_printer : ([`Yield of elt] -> string option) -> unit
+  val yield : Elt.t -> unit
+  val run : (unit -> unit) -> Elt.t Seq.t
+  val register_printer : ([`Yield of Elt.t] -> string option) -> unit
 end
 
-module Make (P : Param) =
+module Make (Elt : Sigs.Type) =
 struct
-  include P
-
-  type _ Effect.t += Yield : elt -> unit Effect.t
+  type _ Effect.t += Yield : Elt.t -> unit Effect.t
 
   let yield x = Effect.perform (Yield x)
 

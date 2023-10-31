@@ -1,6 +1,6 @@
 module Q = QCheck2
 
-module StateEff = Algaeff.State.Make (struct type state = int end)
+module StateEff = Algaeff.State.Make (Int)
 
 module StateMonad =
 struct
@@ -15,7 +15,6 @@ end
 module StateUnmonad =
 struct
   module U = Algaeff.Unmonad.Make (StateMonad)
-  type state = int
   let get () = U.perform StateMonad.get
   let set s = U.perform @@ StateMonad.set s
   let modify f = U.perform @@ StateMonad.modify f
@@ -34,7 +33,7 @@ let gen_cmd =
 
 let gen_prog = Q.Gen.list gen_cmd
 
-module StateTester (S : Algaeff.State.S with type state = int) =
+module StateTester (S : Algaeff.State.S with module State := Int) =
 struct
   let trace ~init prog =
     let go =

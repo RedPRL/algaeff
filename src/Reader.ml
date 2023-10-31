@@ -1,27 +1,20 @@
-module type Param =
-sig
-  type env
-end
-
 module type S =
 sig
-  include Param
+  module Env : Sigs.Type
 
-  val read : unit -> env
-  val scope : (env -> env) -> (unit -> 'a) -> 'a
-  val run : env:env -> (unit -> 'a) -> 'a
+  val read : unit -> Env.t
+  val scope : (Env.t -> Env.t) -> (unit -> 'a) -> 'a
+  val run : env:Env.t -> (unit -> 'a) -> 'a
   val register_printer : ([`Read] -> string option) -> unit
 end
 
-module Make (P : Param) =
+module Make (Env : Sigs.Type) =
 struct
-  include P
-
-  type _ Effect.t += Read : env Effect.t
+  type _ Effect.t += Read : Env.t Effect.t
 
   let read () = Effect.perform Read
 
-  let run ~(env:env) f =
+  let run ~(env:Env.t) f =
     let open Effect.Deep in
     try_with f ()
       { effc = fun (type a) (eff : a Effect.t) ->
