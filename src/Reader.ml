@@ -1,10 +1,9 @@
 module type S =
 sig
-  module Env : Sigs.Type
-
-  val read : unit -> Env.t
-  val scope : (Env.t -> Env.t) -> (unit -> 'a) -> 'a
-  val run : env:Env.t -> (unit -> 'a) -> 'a
+  type env
+  val read : unit -> env
+  val scope : (env -> env) -> (unit -> 'a) -> 'a
+  val run : env:env -> (unit -> 'a) -> 'a
   val register_printer : ([`Read] -> string option) -> unit
 end
 

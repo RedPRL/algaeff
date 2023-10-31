@@ -38,7 +38,7 @@ let gen_cmd =
 
 let gen_prog = Q.Gen.list gen_cmd
 
-module ReaderTester (S : Algaeff.Reader.S with module Env := Int) =
+module ReaderTester (S : Algaeff.Reader.S with type env := int) =
 struct
   let trace ~env prog =
     let rec go =

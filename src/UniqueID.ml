@@ -1,6 +1,6 @@
 module type S =
 sig
-  module Elt : Sigs.Type
+  type elt
 
   module ID :
   sig
@@ -12,11 +12,11 @@ sig
   end
   type id = ID.t
 
-  val register : Elt.t -> id
-  val retrieve : id -> Elt.t
-  val export : unit -> Elt.t Seq.t
-  val run : ?init:Elt.t Seq.t -> (unit -> 'a) -> 'a
-  val register_printer : ([`Register of Elt.t | `Retrieve of id | `Export] -> string option) -> unit
+  val register : elt -> id
+  val retrieve : id -> elt
+  val export : unit -> elt Seq.t
+  val run : ?init:elt Seq.t -> (unit -> 'a) -> 'a
+  val register_printer : ([`Register of elt | `Retrieve of id | `Export] -> string option) -> unit
 end
 
 module Make (Elt : Sigs.Type) =

@@ -16,24 +16,21 @@
    ]}
 *)
 
-(** This should be equivalent to {!Unmonad} applying to the standard reader monad. *)
-
 module type S =
 sig
   (** Signatures of read effects. *)
 
-  (** Type of environments. *)
-  module Env : Sigs.Type
-  (** @open *)
+  type env
+  (** The type of environments. *)
 
-  val read : unit -> Env.t
+  val read : unit -> env
   (** Read the environment. *)
 
-  val scope : (Env.t -> Env.t) -> (unit -> 'a) -> 'a
+  val scope : (env -> env) -> (unit -> 'a) -> 'a
   (** [scope f t] runs the thunk [t] under the new environment that is the result of applying [f] to the current environment. *)
 
-  val run : env:Env.t -> (unit -> 'a) -> 'a
-  (** [run t] runs the thunk [t] which may perform reading effects. *)
+  val run : env:env -> (unit -> 'a) -> 'a
+  (** [run ~env t] runs the thunk [t] which may perform reading effects on the value [env]. *)
 
   val register_printer : ([`Read] -> string option) -> unit
   (** [register_printer p] registers a printer [p] via {!val:Printexc.register_printer} to convert the unhandled internal effect into a string for the OCaml runtime system to display. Ideally, the internal effect should have been handled by {!val:run} and there is no need to use this function, but when it is not the case, this function can be helpful for debugging. The functor {!module:Reader.Make} always registers a simple printer to suggest using {!val:run}, but you can register new ones to override it. The return type of the printer [p] should return [Some s] where [s] is the resulting string, or [None] if it chooses not to convert a particular effect. The registered printers are tried in reverse order until one of them returns [Some s] for some [s]; that is, the last registered printer is tried first. Note that this function is a wrapper of {!val:Printexc.register_printer} and all the registered printers (via this function or {!val:Printexc.register_printer}) are put into the same list.
@@ -44,5 +41,5 @@ sig
   *)
 end
 
-module Make (Env : Sigs.Type) : S with module Env := Env
+module Make (Env : Sigs.Type) : S with type env := Env.t
 (** The implementation of read effects. *)

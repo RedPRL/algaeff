@@ -34,7 +34,7 @@ and prog = cmd list
 let gen_cmd = Q.Gen.map (fun i -> Yield i) Q.Gen.int
 let gen_prog = Q.Gen.list gen_cmd
 
-module SequencerTester (S : Algaeff.Sequencer.S with module Elt := Int) =
+module SequencerTester (S : Algaeff.Sequencer.S with type elt := int) =
 struct
   let trace (prog : prog) =
     let go = function (Yield i) -> S.yield i in

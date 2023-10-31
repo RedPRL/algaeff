@@ -1,10 +1,9 @@
 module type S =
 sig
-  module Elt : Sigs.Type
-
-  val yield : Elt.t -> unit
-  val run : (unit -> unit) -> Elt.t Seq.t
-  val register_printer : ([`Yield of Elt.t] -> string option) -> unit
+  type elt
+  val yield : elt -> unit
+  val run : (unit -> unit) -> elt Seq.t
+  val register_printer : ([`Yield of elt] -> string option) -> unit
 end
 
 module Make (Elt : Sigs.Type) =

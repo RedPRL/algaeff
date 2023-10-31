@@ -33,7 +33,7 @@ let gen_cmd =
 
 let gen_prog = Q.Gen.list gen_cmd
 
-module StateTester (S : Algaeff.State.S with module State := Int) =
+module StateTester (S : Algaeff.State.S with type state := int) =
 struct
   let trace ~init prog =
     let go =
