@@ -22,7 +22,7 @@ end
 
 module SequencerUnmonad =
 struct
-  module U = Algaeff.Unmonad.Make (SequencerMonad)
+  module U = Unmonad.Make (SequencerMonad)
   let yield x = U.perform (SequencerMonad.yield x)
   let run f = output_to_seq @@ snd @@ U.run f
   let register_printer _ = ()

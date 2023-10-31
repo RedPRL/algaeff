@@ -12,8 +12,6 @@ module Mutex = Mutex
 
 module UniqueID = UniqueID
 
-module Unmonad = Unmonad
-
 (** {1 Auxiliary modules} *)
 
 module Sigs = Sigs

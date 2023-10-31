@@ -14,7 +14,7 @@ end
 
 module StateUnmonad =
 struct
-  module U = Algaeff.Unmonad.Make (StateMonad)
+  module U = Unmonad.Make (StateMonad)
   let get () = U.perform StateMonad.get
   let set s = U.perform @@ StateMonad.set s
   let modify f = U.perform @@ StateMonad.modify f
