@@ -2,6 +2,10 @@
 
 This library aims to collect reusable, general effects-based components we have seen when constructing our proof assistants using OCaml 5. All components here have appeared in various tutorials on algebraic effects; `algaeff` wraps these well-known components into an OPAM package.
 
+## API Stability
+
+We use [semantic versioning.](https://semver.org/) Breaking changes will bump the major version number.
+
 ## Components
 
 - [Algaeff.State](https://redprl.org/algaeff/algaeff/Algaeff/State): mutable states
@@ -16,7 +20,7 @@ Effects-based concurrency (cooperative lightweight threading) was already tackle
 There are a few other useful functions:
 
 - [Algaeff.Fun.Deep.finally](https://redprl.org/algaeff/algaeff/Algaeff/Fun/Deep/index.html#val-finally): call `continue` or `discontinue` accordingly.
-- [Algaeff.Fun.Shallow.finally\_with](https://redprl.org/algaeff/algaeff/Algaeff/Fun/Shallow/index.html#val-finally_with): same as above, but for shallow effect handlers.
+- [Algaeff.Fun.Shallow.finally_with](https://redprl.org/algaeff/algaeff/Algaeff/Fun/Shallow/index.html#val-finally_with): same as above, but for shallow effect handlers.
 
 ## How to Use It
 
