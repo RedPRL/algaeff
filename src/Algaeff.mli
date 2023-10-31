@@ -14,6 +14,8 @@ module UniqueID = UniqueID
 
 module Unmonad = Unmonad
 
-(** {1 Auxiliary tools} *)
+(** {1 Auxiliary modules} *)
+
+module Sigs = Sigs
 
 module Fun = Fun

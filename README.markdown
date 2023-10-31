@@ -27,7 +27,7 @@ You need OCaml 5.
 ### Example Code
 
 ```ocaml
-module S = Algaeff.State.Make (struct type state = int end)
+module S = Algaeff.State.Make (Int)
 
 let forty_two = S.run ~init:100 @@ fun () ->
   print_int (S.get ()); (* this will print out 100 *)

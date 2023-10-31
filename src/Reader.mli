@@ -2,7 +2,7 @@
 
 (**
    {[
-     module R = Algaeff.Reader.Make (struct type env = int end)
+     module R = Algaeff.Reader.Make (Int)
 
      let () = R.run ~env:42 @@ fun () ->
        (* this will print out 42 *)
@@ -18,28 +18,21 @@
 
 (** This should be equivalent to {!Unmonad} applying to the standard reader monad. *)
 
-module type Param =
-sig
-  (** Parameters of read effects. *)
-
-  type env
-  (** The type of environments. *)
-end
-
 module type S =
 sig
   (** Signatures of read effects. *)
 
-  include Param
+  (** Type of environments. *)
+  module Env : Sigs.Type
   (** @open *)
 
-  val read : unit -> env
+  val read : unit -> Env.t
   (** Read the environment. *)
 
-  val scope : (env -> env) -> (unit -> 'a) -> 'a
+  val scope : (Env.t -> Env.t) -> (unit -> 'a) -> 'a
   (** [scope f t] runs the thunk [t] under the new environment that is the result of applying [f] to the current environment. *)
 
-  val run : env:env -> (unit -> 'a) -> 'a
+  val run : env:Env.t -> (unit -> 'a) -> 'a
   (** [run t] runs the thunk [t] which may perform reading effects. *)
 
   val register_printer : ([`Read] -> string option) -> unit
@@ -51,5 +44,5 @@ sig
   *)
 end
 
-module Make (P : Param) : S with type env = P.env
+module Make (Env : Sigs.Type) : S with module Env := Env
 (** The implementation of read effects. *)

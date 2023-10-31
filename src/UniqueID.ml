@@ -1,11 +1,6 @@
-module type Param =
-sig
-  type elt
-end
-
 module type S =
 sig
-  include Param
+  module Elt : Sigs.Type
 
   module ID :
   sig
@@ -17,17 +12,15 @@ sig
   end
   type id = ID.t
 
-  val register : elt -> id
-  val retrieve : id -> elt
-  val export : unit -> elt Seq.t
-  val run : ?init:elt Seq.t -> (unit -> 'a) -> 'a
-  val register_printer : ([`Register of elt | `Retrieve of id | `Export] -> string option) -> unit
+  val register : Elt.t -> id
+  val retrieve : id -> Elt.t
+  val export : unit -> Elt.t Seq.t
+  val run : ?init:Elt.t Seq.t -> (unit -> 'a) -> 'a
+  val register_printer : ([`Register of Elt.t | `Retrieve of id | `Export] -> string option) -> unit
 end
 
-module Make (P : Param) =
+module Make (Elt : Sigs.Type) =
 struct
-  include P
-
   module ID =
   struct
     type t = int
@@ -39,16 +32,16 @@ struct
   type id = int
 
   type _ Effect.t +=
-    | Register : elt -> id Effect.t
-    | Retrieve : id -> elt Effect.t
-    | Export : elt Seq.t Effect.t
+    | Register : Elt.t -> id Effect.t
+    | Retrieve : id -> Elt.t Effect.t
+    | Export : Elt.t Seq.t Effect.t
 
   let register x = Effect.perform (Register x)
   let retrieve i = Effect.perform (Retrieve i)
   let export () = Effect.perform Export
 
   module M = Map.Make (Int)
-  module Eff = State.Make (struct type state = elt M.t end)
+  module Eff = State.Make (struct type t = Elt.t M.t end)
 
   let run ?(init=Seq.empty) f =
     let init = M.of_seq @@ Seq.zip (Seq.ints 0) init in

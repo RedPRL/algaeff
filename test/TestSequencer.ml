@@ -1,6 +1,6 @@
 module Q = QCheck2
 
-module SequencerEff = Algaeff.Sequencer.Make (struct type elt = int end)
+module SequencerEff = Algaeff.Sequencer.Make (Int)
 
 type 'a output = Leaf of 'a list | Branch of 'a output * 'a output
 
@@ -23,7 +23,6 @@ end
 module SequencerUnmonad =
 struct
   module U = Algaeff.Unmonad.Make (SequencerMonad)
-  type elt = int
   let yield x = U.perform (SequencerMonad.yield x)
   let run f = output_to_seq @@ snd @@ U.run f
   let register_printer _ = ()
@@ -35,7 +34,7 @@ and prog = cmd list
 let gen_cmd = Q.Gen.map (fun i -> Yield i) Q.Gen.int
 let gen_prog = Q.Gen.list gen_cmd
 
-module SequencerTester (S : Algaeff.Sequencer.S with type elt = int) =
+module SequencerTester (S : Algaeff.Sequencer.S with module Elt := Int) =
 struct
   let trace (prog : prog) =
     let go = function (Yield i) -> S.yield i in

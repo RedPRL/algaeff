@@ -63,5 +63,5 @@ sig
       and then returns the corresponding monadic expression. *)
 end
 
-module Make (M : Monad) : S with type 'a t = 'a M.t
+module Make (M : Monad) : S with type 'a t := 'a M.t
 (** The implementation of monad effects. *)
