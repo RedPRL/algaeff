@@ -1,8 +1,8 @@
-(** Common signatures shared across different components. *)
+(** Signatures shared across different components. *)
 
-(** A signature carrying a type. *)
+(** This is a type wrapped as a module. *)
 module type Type =
 sig
-  (** The type. *)
+  (** The wrapped type. *)
   type t
 end
