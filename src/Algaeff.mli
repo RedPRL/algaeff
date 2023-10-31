@@ -2,18 +2,18 @@
 
 (** {1 Reusable components} *)
 
-module State : module type of State
+module State = State
 
-module Reader : module type of Reader
+module Reader = Reader
 
-module Sequencer : module type of Sequencer
+module Sequencer = Sequencer
 
-module Mutex : module type of Mutex
+module Mutex = Mutex
 
-module UniqueID : module type of UniqueID
+module UniqueID = UniqueID
 
-module Unmonad : module type of Unmonad
+module Unmonad = Unmonad
 
 (** {1 Auxiliary tools} *)
 
-module Fun : module type of Fun
+module Fun = Fun
