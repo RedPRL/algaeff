@@ -13,7 +13,7 @@
 
 module type S =
 sig
-  (** Signatures of read effects. *)
+  (** Signatures of state effects. *)
 
   type state
   (** The type of states. *)
