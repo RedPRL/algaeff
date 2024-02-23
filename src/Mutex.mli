@@ -12,7 +12,7 @@
 
      let _ = M.run @@ fun () ->
        M.exclusively @@ fun () ->
-       (* this raise M.Locked *)
+       (* this raises M.Locked *)
        M.exclusively @@ fun () ->
        100
    ]}
