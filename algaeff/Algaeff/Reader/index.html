@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title>Reader (algaeff.Algaeff.Reader)</title><meta charset="utf-8"/><link rel="stylesheet" href="../../../odoc.support/odoc.css"/><meta name="generator" content="odoc 2.4.2"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><script src="../../../odoc.support/highlight.pack.js"></script><script>hljs.initHighlightingOnLoad();</script></head><body class="odoc"><nav class="odoc-nav"><a href="../index.html">Up</a> – <a href="../../index.html">algaeff</a> &#x00BB; <a href="../index.html">Algaeff</a> &#x00BB; Reader</nav><header class="odoc-preamble"><h1>Module <code><span>Algaeff.Reader</span></code></h1><p>Effects for reading immutable environments.</p></header><div class="odoc-content"><pre class="language-ocaml"><code>module R = Algaeff.Reader.Make (Int)
+
+let () = R.run ~env:42 @@ fun () -&gt;
+  (* this will print out 42 *)
+  print_int (R.read ());
+
+  (* this will print out 43 *)
+  R.scope (fun i -&gt; i + 1) (fun () -&gt; print_int (R.read ()));
+
+  (* this will print out 42 again *)
+  print_int (R.read ())</code></pre><div class="odoc-spec"><div class="spec module-type anchored" id="module-type-S"><a href="#module-type-S" class="anchor"></a><code><span><span class="keyword">module</span> <span class="keyword">type</span> <a href="module-type-S/index.html">S</a></span><span> = <span class="keyword">sig</span> ... <span class="keyword">end</span></span></code></div><div class="spec-doc"><p>Signatures of read effects.</p></div></div><div class="odoc-spec"><div class="spec module anchored" id="module-Make"><a href="#module-Make" class="anchor"></a><code><span><span class="keyword">module</span> <a href="Make/index.html">Make</a></span><span> (<a href="Make/argument-1-Env/index.html">Env</a> : <a href="../Sigs/module-type-Type/index.html">Sigs.Type</a>) : <a href="module-type-S/index.html">S</a> <span class="keyword">with</span> <span><span class="keyword">type</span> <a href="module-type-S/index.html#type-env">env</a> := <a href="Make/argument-1-Env/index.html#type-t">Env.t</a></span></span></code></div><div class="spec-doc"><p>The implementation of read effects.</p></div></div></div></body></html>

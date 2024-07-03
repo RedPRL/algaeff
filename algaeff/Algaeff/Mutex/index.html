@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title>Mutex (algaeff.Algaeff.Mutex)</title><meta charset="utf-8"/><link rel="stylesheet" href="../../../odoc.support/odoc.css"/><meta name="generator" content="odoc 2.4.2"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><script src="../../../odoc.support/highlight.pack.js"></script><script>hljs.initHighlightingOnLoad();</script></head><body class="odoc"><nav class="odoc-nav"><a href="../index.html">Up</a> – <a href="../../index.html">algaeff</a> &#x00BB; <a href="../index.html">Algaeff</a> &#x00BB; Mutex</nav><header class="odoc-preamble"><h1>Module <code><span>Algaeff.Mutex</span></code></h1><p>Effects for making concurrent execution immediately fail.</p></header><div class="odoc-content"><pre class="language-ocaml"><code>module M = Algaeff.Mutex.Make ()
+
+let () = M.run @@ fun () -&gt;
+  let ten = M.exclusively @@ fun () -&gt; 10 in
+  let nine = M.exclusively @@ fun () -&gt; 9 in
+  (* this will print out 19 *)
+  print_int (ten + nine)
+
+let _ = M.run @@ fun () -&gt;
+  M.exclusively @@ fun () -&gt;
+  (* this raises M.Locked *)
+  M.exclusively @@ fun () -&gt;
+  100</code></pre><p>Note that the exception <a href="module-type-S/index.html#exception-Locked"><code>S.Locked</code></a> would be immediately raised for any attempt to lock an already locked mutex. The typical application of this component is to prevent erroneous concurrent API access, not to provide synchronization. Therefore, no waiting would happen.</p><p>It is impossible to implement meaningful synchronization unless this module also handles lightweight threading. For applications that need synchronization between lightweight threads (so that one thread would wait for another thread to unlock the mutex), check out other libraries such as the <a href="https://github.com/ocaml-multicore/eio">Eio</a> and <a href="https://erratique.ch/software/affect">Affect</a>.</p><div class="odoc-spec"><div class="spec module-type anchored" id="module-type-S"><a href="#module-type-S" class="anchor"></a><code><span><span class="keyword">module</span> <span class="keyword">type</span> <a href="module-type-S/index.html">S</a></span><span> = <span class="keyword">sig</span> ... <span class="keyword">end</span></span></code></div><div class="spec-doc"><p>The signature of mutex effects.</p></div></div><div class="odoc-spec"><div class="spec module anchored" id="module-Make"><a href="#module-Make" class="anchor"></a><code><span><span class="keyword">module</span> <a href="Make/index.html">Make</a></span><span> () : <a href="module-type-S/index.html">S</a></span></code></div><div class="spec-doc"><p>The implementation of mutex effects. <code>Make</code> is generative so that one can use multiple mutexes at the same time.</p></div></div></div></body></html>
