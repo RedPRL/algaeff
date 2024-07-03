@@ -5,7 +5,7 @@ sig
   val set : state -> unit
   val modify : (state -> state) -> unit
   val run : init:state -> (unit -> 'a) -> 'a
-  val try_with : get:(unit -> state) -> set:(state -> unit) -> (unit -> 'a) -> 'a
+  val try_with : ?get:(unit -> state) -> ?set:(state -> unit) -> (unit -> 'a) -> 'a
   val register_printer : ([`Get | `Set of state] -> string option) -> unit
 end
 
@@ -30,7 +30,7 @@ struct
               st := v; continue k ()
             | _ -> None }
 
-  let try_with ~(get:unit -> State.t) ~(set:State.t -> unit) f =
+  let try_with ?(get=get) ?(set=set) f =
     let open Effect.Deep in
     try_with f ()
       { effc = fun (type a) (eff : a Effect.t) ->
