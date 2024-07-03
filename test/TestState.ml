@@ -19,6 +19,7 @@ struct
   let set s = U.perform @@ StateMonad.set s
   let modify f = U.perform @@ StateMonad.modify f
   let run ~init f = fst @@ U.run f init
+  let try_with ?get:_ ?set:_ _f = failwith "state monad can't try_with"
   let register_printer _ = ()
 end
 
