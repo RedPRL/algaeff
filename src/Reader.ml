@@ -9,18 +9,13 @@ end
 
 module Make (Env : Sigs.Type) =
 struct
-  type _ Effect.t += Read : Env.t Effect.t
+  type _ eff += Read : Env.t eff
 
   let read () = Effect.perform Read
 
   let run ~(env:Env.t) f =
     let open Effect.Deep in
-    try_with f ()
-      { effc = fun (type a) (eff : a Effect.t) ->
-            match eff with
-            | Read -> Option.some @@ fun (k : (a, _) continuation) ->
-              continue k env
-            | _ -> None }
+    try f () with effect Read, k -> continue k env
 
   let scope f c = run ~env:(f @@ read ()) c
 

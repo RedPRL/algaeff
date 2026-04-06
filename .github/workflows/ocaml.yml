@@ -9,8 +9,7 @@ jobs:
     strategy:
       matrix:
         include:
-          - ocaml-compiler: "ocaml-base-compiler.5.0.0"
-          - ocaml-compiler: "ocaml-base-compiler.5.1.1"
+          - ocaml-compiler: "ocaml-base-compiler.5.3.0~alpha1"
             with-doc: true
     runs-on: ubuntu-latest
     steps:

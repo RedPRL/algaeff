@@ -31,10 +31,10 @@ struct
   end
   type id = int
 
-  type _ Effect.t +=
-    | Register : Elt.t -> id Effect.t
-    | Retrieve : id -> Elt.t Effect.t
-    | Export : Elt.t Seq.t Effect.t
+  type _ eff +=
+    | Register : Elt.t -> id eff
+    | Retrieve : id -> Elt.t eff
+    | Export : Elt.t Seq.t eff
 
   let register x = Effect.perform (Register x)
   let retrieve i = Effect.perform (Retrieve i)
@@ -47,19 +47,16 @@ struct
     let init = M.of_seq @@ Seq.zip (Seq.ints 0) init in
     Eff.run ~init @@ fun () ->
     let open Effect.Deep in
-    try_with f ()
-      { effc = fun (type a) (eff : a Effect.t) ->
-            match eff with
-            | Register x -> Option.some @@ fun (k : (a, _) continuation) ->
-              let st = Eff.get () in
-              let next = M.cardinal st in
-              Eff.set @@ M.add next x st;
-              continue k next
-            | Retrieve i -> Option.some @@ fun (k : (a, _) continuation) ->
-              continue k @@ M.find i @@ Eff.get ()
-            | Export -> Option.some @@ fun (k : (a, _) continuation) ->
-              continue k @@ Seq.map snd @@ M.to_seq @@ Eff.get ()
-            | _ -> None }
+    try f () with
+    | effect Register x, k ->
+      let st = Eff.get () in
+      let next = M.cardinal st in
+      Eff.set @@ M.add next x st;
+      continue k next
+    | effect Retrieve i, k ->
+      continue k @@ M.find i @@ Eff.get ()
+    | effect Export, k ->
+      continue k @@ Seq.map snd @@ M.to_seq @@ Eff.get ()
 
   let register_printer f = Printexc.register_printer @@ function
     | Effect.Unhandled (Register elt) -> f (`Register elt)
